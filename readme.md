@@ -1,6 +1,8 @@
 # DHT2x Protocol Analyzer for Saleae Logic
 This plugin implements a 1-wire like decoder. Default timings are based on the datasheet. The decoder is a simple threshold detector which checks HIGH pulse duration. Anything above (One_duration+Zero_duration)/2 is considered 1 and below is 0. There is cehcking for the host start signal which is any LOW duration > 1 ms. The decoder expects a message length of 40 bits in total (not including the initial host/sensor hand shaking).
 
+# Screenshot
+![Overview Screenshot](/images/screenshot1.png)
 
 # Build Instructions
 To build on Windows, open the visual studio project in the Visual Studio folder, and build. The Visual Studio solution has configurations for 32 bit and 64 bit builds. You will likely need to switch the configuration to 64 bit and build that in order to get the analyzer to load in the Windows software.
