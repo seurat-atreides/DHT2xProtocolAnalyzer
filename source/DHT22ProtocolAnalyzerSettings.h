@@ -17,8 +17,8 @@ public:
 
 	
 	Channel mInputChannel;
-	U32 mLongPulse_ms;
-	U32 mShortPulse_ms;
+	U32 mPulseWidthZero_us;
+	U32 mPulseWidthOne_us;
 
 protected:
 	std::auto_ptr< AnalyzerSettingInterfaceChannel >	mInputChannelInterface;

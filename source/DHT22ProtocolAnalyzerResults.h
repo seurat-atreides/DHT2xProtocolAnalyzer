@@ -20,6 +20,9 @@ public:
 	virtual void GenerateTransactionTabularText( U64 transaction_id, DisplayBase display_base );
 
 protected: //functions
+	virtual std::string GetLongDecodedString(U64 frame_index, DisplayBase display_base);
+    virtual std::string GetMedDecodedString(U64 frame_index, DisplayBase display_base);
+    virtual S16 DecodeTemperature(U64 inTemp);
 
 protected:  //vars
 	DHT22ProtocolAnalyzerSettings* mSettings;

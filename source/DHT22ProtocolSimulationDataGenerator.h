@@ -17,13 +17,14 @@ public:
 protected:
 	DHT22ProtocolAnalyzerSettings* mSettings;
 	U32 mSimulationSampleRateHz;
+    static U8 GenerateCheckSum(U16 inRelH, U16 inTemp);
 
 protected:
-	void CreateSerialByte();
-	std::string mSerialText;
+	void CreateDHT2xFrame();
+	std::vector<U16> mData;
 	U32 mStringIndex;
 
-	SimulationChannelDescriptor mSerialSimulationData;
+	SimulationChannelDescriptor mDHT2xSimulationData;
 
 };
 #endif //DHT22PROTOCOL_SIMULATION_DATA_GENERATOR
