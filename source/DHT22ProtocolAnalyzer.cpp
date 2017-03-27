@@ -116,8 +116,8 @@ void DHT22ProtocolAnalyzer::WorkerThread()
                     value += (pulse_widths[bit_pos].value) << (15 - bit_pos);
                 }
                 //we have a byte to save. 			
-                frame.mData1 = value;
-                frame.mData2 = 16;
+                frame.mData1 = value;   // Value
+                frame.mData2 = 16;      // Bits per value width
                 frame.mFlags = 0;
                 frame.mType = DHT2xFrameType::RELATIVEHUMIDITY;
                 frame.mStartingSampleInclusive = pulse_widths[0].pulse_start;

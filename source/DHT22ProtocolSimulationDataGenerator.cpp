@@ -7,6 +7,7 @@ DHT22ProtocolSimulationDataGenerator::DHT22ProtocolSimulationDataGenerator()
 : mData(),
   mStringIndex( 0 )
 {
+    // Static Simulation Data
     U16 relh = 321;
     U16 temp = 432;
     U16 csum = GenerateCheckSum(relh, temp);
