@@ -10,3 +10,5 @@ To build on Linux, run the build_analyzer.py script. The compiled libraries can 
 	python build_analyzer.py
 
 You will also need the 1.1.32 SDK, the latest SDK release. That is available on a separate branch of the Saleae AnalyzerSDK Github repository. Simply change the submodule configuration to point to that branch.
+
+>**Note:** I had to add "-std=c++11" toi the compile options so the project would build without errors!
