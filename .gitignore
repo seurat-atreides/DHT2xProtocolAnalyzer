@@ -1,6 +1,3 @@
-Debug/
-Release/
-*.VC.db
-*.VC.opendb
-*.suo
-*.sln.ecd
+AnalyzerSDK/
+debug/
+release/
