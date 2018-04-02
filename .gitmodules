@@ -1,3 +1,4 @@
 [submodule "AnalyzerSDK"]
 	path = AnalyzerSDK
 	url = https://github.com/saleae/AnalyzerSDK.git
+  ignore = dirty
