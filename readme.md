@@ -1,5 +1,5 @@
 # DHT2x Protocol Analyzer for Saleae Logic
-This plugin implements a 1-wire like decoder. Default timings are based on the datasheet. The decoder is a simple threshold detector which checks HIGH pulse duration. Anything above (One_duration+Zero_duration)/2 is considered 1 and below is 0. There is cehcking for the host start signal which is any LOW duration > 1 ms. The decoder expects a message length of 40 bits in total (not including the initial host/sensor hand shaking).
+This plugin implements a decoder for the DHT2x 1-wire protocol. Default timings are based on the datasheet. The decoder is a simple threshold detector which checks HIGH pulse duration. Anything above (One_duration+Zero_duration)/2 is considered 1 and below is 0. There is checking for the host start signal which is any LOW duration > 1 ms. The decoder expects a message length of 40 bits in total (not including the initial host/sensor handshake).
 
 # Screenshot
 ![Overview Screenshot](images/DHT22_Saleae-Logic_snap.png)
