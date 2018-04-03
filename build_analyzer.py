@@ -1,12 +1,8 @@
 import os, glob, platform
 
 #find out if we're running on mac or linux and set the dynamic library extension
-dylib_ext = ""
-if platform.system().lower() == "darwin":
-    dylib_ext = ".dylib"
-else:
-    dylib_ext = ".so"
-    
+dylib_ext = ".so"
+
 print("Running on " + platform.system())
 
 #make sure the release folder exists, and clean out any .o/.so file if there are any
@@ -83,12 +79,8 @@ for link_path in link_paths:
 for link_dependency in link_dependencies:
     command += link_dependency + " "
 
-#make a dynamic (shared) library (.so/.dylib)
-
-if dylib_ext == ".dylib":
-    command += "-dynamiclib "
-else:
-    command += "-shared "
+#make a dynamic (shared) library (.so)
+command += "-shared "
 
 #figgure out what the name of this analyzer is
 analyzer_name = ""
@@ -97,13 +89,9 @@ for cpp_file in cpp_files:
         analyzer_name = cpp_file.replace( "Analyzer.cpp", "" )
         break
 
-#the files to create (.so/.dylib files)
-if dylib_ext == ".dylib":
-    release_command = command + "-o release/lib" + analyzer_name + "Analyzer.dylib "
-    debug_command = command + "-o debug/lib" + analyzer_name + "Analyzer.dylib "
-else:
-    release_command = command + "-o\"release/lib" + analyzer_name + "Analyzer.so\" "
-    debug_command = command + "-o\"debug/lib" + analyzer_name + "Analyzer.so\" "
+#the files to create (.so files)
+release_command = command + "-o\"release/lib" + analyzer_name + "Analyzer.so\" "
+debug_command = command + "-o\"debug/lib" + analyzer_name + "Analyzer.so\" "
 
 #add all the object files to link
 for cpp_file in cpp_files:
