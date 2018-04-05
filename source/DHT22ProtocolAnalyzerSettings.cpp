@@ -5,22 +5,22 @@
 DHT22ProtocolAnalyzerSettings::DHT22ProtocolAnalyzerSettings()
 :	mInputChannel( UNDEFINED_CHANNEL ),
 	mPulseWidthOne_us( 70 ),
-	mPulseWidthZero_us( 25 )
-{
+	mPulseWidthZero_us( 26 ) {
+    
 	mInputChannelInterface.reset( new AnalyzerSettingInterfaceChannel() );
-	mInputChannelInterface->SetTitleAndTooltip( "Data Line", "DHT2x 1-Wire Data" );
+	mInputChannelInterface->SetTitleAndTooltip( "Data Line", "DHT2x 1-Wire data" );
 	mInputChannelInterface->SetChannel( mInputChannel );
 
 	mLongPulseInterface.reset(new AnalyzerSettingInterfaceInteger());
-	mLongPulseInterface->SetTitleAndTooltip("One Valued Pulse Duration (microseconds)", "Specify the duration of a One pulse (탎).");
-	mLongPulseInterface->SetMax(1000000);
-	mLongPulseInterface->SetMin(1);
+	mLongPulseInterface->SetTitleAndTooltip("'1' pulse duration (탎)", "Specify the duration of a '1' pulse (탎).");
+	mLongPulseInterface->SetMax(75);
+	mLongPulseInterface->SetMin(68);
 	mLongPulseInterface->SetInteger(mPulseWidthOne_us);
 
 	mShortPulseInterface.reset(new AnalyzerSettingInterfaceInteger());
-	mShortPulseInterface->SetTitleAndTooltip("Zero Valued Pulse Duration (microseconds)", "Specify the duration of a Zero pulse (탎).");
-	mShortPulseInterface->SetMax(1000000);
-	mShortPulseInterface->SetMin(1);
+	mShortPulseInterface->SetTitleAndTooltip("'0' pulse duration (탎)", "Specify the duration of a '0' pulse (탎).");
+	mShortPulseInterface->SetMax(30);
+	mShortPulseInterface->SetMin(22);
 	mShortPulseInterface->SetInteger(mPulseWidthZero_us);
 
 	AddInterface(mInputChannelInterface.get());
@@ -35,12 +35,10 @@ DHT22ProtocolAnalyzerSettings::DHT22ProtocolAnalyzerSettings()
 	AddChannel( mInputChannel, "Data", false );
 }
 
-DHT22ProtocolAnalyzerSettings::~DHT22ProtocolAnalyzerSettings()
-{
+DHT22ProtocolAnalyzerSettings::~DHT22ProtocolAnalyzerSettings(){
 }
 
-bool DHT22ProtocolAnalyzerSettings::SetSettingsFromInterfaces()
-{
+bool DHT22ProtocolAnalyzerSettings::SetSettingsFromInterfaces(){
 	mInputChannel = mInputChannelInterface->GetChannel();
 	mPulseWidthOne_us = mLongPulseInterface->GetInteger();
 	mPulseWidthZero_us = mShortPulseInterface->GetInteger();
@@ -51,15 +49,13 @@ bool DHT22ProtocolAnalyzerSettings::SetSettingsFromInterfaces()
 	return true;
 }
 
-void DHT22ProtocolAnalyzerSettings::UpdateInterfacesFromSettings()
-{
+void DHT22ProtocolAnalyzerSettings::UpdateInterfacesFromSettings(){
 	mInputChannelInterface->SetChannel(mInputChannel);
 	mLongPulseInterface->SetInteger(mPulseWidthOne_us);
 	mShortPulseInterface->SetInteger(mPulseWidthZero_us);
 }
 
-void DHT22ProtocolAnalyzerSettings::LoadSettings( const char* settings )
-{
+void DHT22ProtocolAnalyzerSettings::LoadSettings( const char* settings ){
 	SimpleArchive text_archive;
 	text_archive.SetString( settings );
 
@@ -73,8 +69,7 @@ void DHT22ProtocolAnalyzerSettings::LoadSettings( const char* settings )
 	UpdateInterfacesFromSettings();
 }
 
-const char* DHT22ProtocolAnalyzerSettings::SaveSettings()
-{
+const char* DHT22ProtocolAnalyzerSettings::SaveSettings(){
 	SimpleArchive text_archive;
 
 	text_archive << mInputChannel;

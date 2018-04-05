@@ -4,8 +4,7 @@
 #include <AnalyzerSettings.h>
 #include <AnalyzerTypes.h>
 
-class DHT22ProtocolAnalyzerSettings : public AnalyzerSettings
-{
+class DHT22ProtocolAnalyzerSettings : public AnalyzerSettings {
 public:
 	DHT22ProtocolAnalyzerSettings();
 	virtual ~DHT22ProtocolAnalyzerSettings();
