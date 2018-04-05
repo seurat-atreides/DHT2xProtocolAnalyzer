@@ -8,17 +8,17 @@ DHT22ProtocolAnalyzerSettings::DHT22ProtocolAnalyzerSettings()
 	mPulseWidthZero_us( 26 ) {
     
 	mInputChannelInterface.reset( new AnalyzerSettingInterfaceChannel() );
-	mInputChannelInterface->SetTitleAndTooltip( "Data Line", "DHT2x 1-Wire data" );
+	mInputChannelInterface->SetTitleAndTooltip( "Data Channel:", "DHT2x 1-Wire data channel" );
 	mInputChannelInterface->SetChannel( mInputChannel );
 
 	mLongPulseInterface.reset(new AnalyzerSettingInterfaceInteger());
-	mLongPulseInterface->SetTitleAndTooltip("'1' pulse duration (탎)", "Specify the duration of a '1' pulse (탎).");
+	mLongPulseInterface->SetTitleAndTooltip("'1' Pulse Duration [microsec]:", "Specify the duration of a '1' pulse in microseconds.");
 	mLongPulseInterface->SetMax(75);
 	mLongPulseInterface->SetMin(68);
 	mLongPulseInterface->SetInteger(mPulseWidthOne_us);
 
 	mShortPulseInterface.reset(new AnalyzerSettingInterfaceInteger());
-	mShortPulseInterface->SetTitleAndTooltip("'0' pulse duration (탎)", "Specify the duration of a '0' pulse (탎).");
+	mShortPulseInterface->SetTitleAndTooltip("'0' Pulse Duration [microsec]:", "Specify the duration of a '0' pulse in microseconds.");
 	mShortPulseInterface->SetMax(30);
 	mShortPulseInterface->SetMin(22);
 	mShortPulseInterface->SetInteger(mPulseWidthZero_us);

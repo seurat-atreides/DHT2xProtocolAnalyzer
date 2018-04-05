@@ -8,8 +8,8 @@ DHT22ProtocolSimulationDataGenerator::DHT22ProtocolSimulationDataGenerator()
   mStringIndex( 0 )
 {
     // Static Simulation Data
-    U16 relh = 321;
-    U16 temp = 432;
+    U16 relh = 396;
+    U16 temp = 224;
     U16 csum = GenerateCheckSum(relh, temp);
     csum &= 0xFF;
     mData.push_back(relh);
@@ -45,8 +45,8 @@ U8 DHT22ProtocolSimulationDataGenerator::GenerateCheckSum(U16 inRelH, U16 inTemp
     csum &= 0xFF;
     return csum;
 }
-22
-1111void DHT22ProtocolSimulationDataGenerator::CreateDHT2xFrame() {
+
+void DHT22ProtocolSimulationDataGenerator::CreateDHT2xFrame() {
     U32 samples_per_host1 = mSimulationSampleRateHz * 2e-3;
     U32 samples_per_host2 = mSimulationSampleRateHz * 30e-6;
     U32 samples_per_sens1 = mSimulationSampleRateHz * 80e-6;
