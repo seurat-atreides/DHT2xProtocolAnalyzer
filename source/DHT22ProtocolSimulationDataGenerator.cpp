@@ -17,26 +17,21 @@ DHT22ProtocolSimulationDataGenerator::DHT22ProtocolSimulationDataGenerator()
     mData.push_back(csum);
 }
 
-DHT22ProtocolSimulationDataGenerator::~DHT22ProtocolSimulationDataGenerator()
-{
+DHT22ProtocolSimulationDataGenerator::~DHT22ProtocolSimulationDataGenerator() {
 }
 
-void DHT22ProtocolSimulationDataGenerator::Initialize( U32 simulation_sample_rate, DHT22ProtocolAnalyzerSettings* settings )
-{
+void DHT22ProtocolSimulationDataGenerator::Initialize( U32 simulation_sample_rate, DHT22ProtocolAnalyzerSettings* settings ) {
 	mSimulationSampleRateHz = simulation_sample_rate;
 	mSettings = settings;
-
 	mDHT2xSimulationData.SetChannel( mSettings->mInputChannel );
 	mDHT2xSimulationData.SetSampleRate( simulation_sample_rate );
 	mDHT2xSimulationData.SetInitialBitState( BIT_HIGH );
 }
 
-U32 DHT22ProtocolSimulationDataGenerator::GenerateSimulationData( U64 largest_sample_requested, U32 sample_rate, SimulationChannelDescriptor** simulation_channel )
-{
+U32 DHT22ProtocolSimulationDataGenerator::GenerateSimulationData( U64 largest_sample_requested, U32 sample_rate, SimulationChannelDescriptor** simulation_channel ) {
 	U64 adjusted_largest_sample_requested = AnalyzerHelpers::AdjustSimulationTargetSample( largest_sample_requested, sample_rate, mSimulationSampleRateHz );
 
-	while( mDHT2xSimulationData.GetCurrentSampleNumber() < adjusted_largest_sample_requested )
-	{
+	while( mDHT2xSimulationData.GetCurrentSampleNumber() < adjusted_largest_sample_requested ) {
         CreateDHT2xFrame();
 	}
 
@@ -44,16 +39,14 @@ U32 DHT22ProtocolSimulationDataGenerator::GenerateSimulationData( U64 largest_sa
 	return 1;
 }
 
-U8 DHT22ProtocolSimulationDataGenerator::GenerateCheckSum(U16 inRelH, U16 inTemp)
-{
+U8 DHT22ProtocolSimulationDataGenerator::GenerateCheckSum(U16 inRelH, U16 inTemp) {
     U16 csum = ((inRelH & 0xFF00) >> 8) + ((inRelH & 0xFF))
                 + ((inTemp & 0xFF00) >> 8) + ((inTemp & 0xFF));
     csum &= 0xFF;
     return csum;
 }
-
-void DHT22ProtocolSimulationDataGenerator::CreateDHT2xFrame()
-{
+22
+1111void DHT22ProtocolSimulationDataGenerator::CreateDHT2xFrame() {
     U32 samples_per_host1 = mSimulationSampleRateHz * 2e-3;
     U32 samples_per_host2 = mSimulationSampleRateHz * 30e-6;
     U32 samples_per_sens1 = mSimulationSampleRateHz * 80e-6;
@@ -85,15 +78,12 @@ void DHT22ProtocolSimulationDataGenerator::CreateDHT2xFrame()
     mDHT2xSimulationData.Advance(samples_per_start_tx);  //add sensor start bit time
 
     U16 mask = 0x1 << 15;
-    for (U16 i = 0; i<16; i++)
-    {
+    for (U16 i = 0; i<16; i++) {
         mDHT2xSimulationData.Transition();  //high-going edge 
-        if ((relh & mask) != 0)
-        {
+        if ((relh & mask) != 0) {
             mDHT2xSimulationData.Advance(samples_per_one);  //add sensor bit time
         }
-        else
-        {
+        else {
             mDHT2xSimulationData.Advance(samples_per_zero);  //add sensor bit time
         }
         mDHT2xSimulationData.Transition();  //low-going edge 
@@ -102,15 +92,12 @@ void DHT22ProtocolSimulationDataGenerator::CreateDHT2xFrame()
     }
 
     mask = 0x1 << 15;
-    for (U16 i = 0; i<16; i++)
-    {
+    for (U16 i = 0; i<16; i++) {
         mDHT2xSimulationData.Transition();  //high-going edge 
-        if ((temp & mask) != 0)
-        {
+        if ((temp & mask) != 0) {
             mDHT2xSimulationData.Advance(samples_per_one);  //add sensor bit time
         }
-        else
-        {
+        else {
             mDHT2xSimulationData.Advance(samples_per_zero);  //add sensor bit time
         }
         mDHT2xSimulationData.Transition();  //low-going edge 
@@ -119,15 +106,12 @@ void DHT22ProtocolSimulationDataGenerator::CreateDHT2xFrame()
     }
 
     mask = 0x1 << 7;
-    for (U16 i = 0; i<8; i++)
-    {
+    for (U16 i = 0; i<8; i++) {
         mDHT2xSimulationData.Transition();  //high-going edge 
-        if ((csum & mask) != 0)
-        {
+        if ((csum & mask) != 0) {
             mDHT2xSimulationData.Advance(samples_per_one);  //add sensor bit time
         }
-        else
-        {
+        else {
             mDHT2xSimulationData.Advance(samples_per_zero);  //add sensor bit time
         }
         mDHT2xSimulationData.Transition();  //low-going edge 

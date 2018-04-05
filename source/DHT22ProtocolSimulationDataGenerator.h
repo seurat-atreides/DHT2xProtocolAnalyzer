@@ -3,10 +3,10 @@
 
 #include <SimulationChannelDescriptor.h>
 #include <string>
+
 class DHT22ProtocolAnalyzerSettings;
 
-class DHT22ProtocolSimulationDataGenerator
-{
+class DHT22ProtocolSimulationDataGenerator {
 public:
 	DHT22ProtocolSimulationDataGenerator();
 	~DHT22ProtocolSimulationDataGenerator();
