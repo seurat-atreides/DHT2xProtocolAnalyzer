@@ -15,4 +15,4 @@ To build on Linux, run the build_analyzer.py script. The compiled libraries can 
 
 This plugin requires the latest release of the Saleae AnalyzerSDK. It is available as a submodule linked to the Saleae AnalyzerSDK Github repository.
 
->**Note:** I had to add "-std=c++11" to the compile options so the project would build without errors!
+>**Note:** I had to add "-std=c++17" to the compile options so the project would build without errors!
